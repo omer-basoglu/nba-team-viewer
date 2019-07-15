@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+            android:id="@+id/order_alphabetically"
+            android:title="@string/orderAlphabetically"
+            />
+    <item
+            android:id="@+id/order_wins"
+            android:title="@string/orderWins"
+            />
+    <item
+            android:id="@+id/order_losses"
+            android:title="@string/orderLosses"
+            />
+</menu>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+
+        <variable
+                name="team"
+                type="com.obasoglu.nbateamviewer.data.Team"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <TextView
+                android:id="@+id/tv_fullName"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="@{team.fullName}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:textSize="24sp"
+                tools:text="Team FullName"/>
+
+        <TextView
+                android:id="@+id/tv_wins"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_fullName"
+                android:text="@{String.valueOf(team.wins)}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:textSize="16sp"
+                tools:text="14"/>
+
+        <TextView
+                android:id="@+id/tv_losses"
+                app:layout_constraintLeft_toRightOf="@id/tv_wins"
+                app:layout_constraintTop_toBottomOf="@id/tv_fullName"
+                android:text="@{String.valueOf(team.losses)}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:textSize="16sp"
+                tools:text="22"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

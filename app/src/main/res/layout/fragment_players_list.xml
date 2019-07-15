@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+                name="viewmodel"
+                type="com.obasoglu.nbateamviewer.screens.teampage.TeamsPageViewModel"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".screens.MainActivity"
+            >
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_teams"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:setTeam="@{viewmodel.team}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_players_list"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
