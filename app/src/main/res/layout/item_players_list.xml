@@ -11,52 +11,62 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+            android:padding="@dimen/default_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
         <TextView
-                android:id="@+id/tv_firstName"
+                android:id="@+id/tv_fullName"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:text="@{player.firstName}"
+                android:textColor="@android:color/black"
+                android:text="@{player.firstName + ` ` + player.lastName}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/default_margin"
                 android:layout_marginTop="@dimen/default_margin"
                 android:textSize="16sp"
-                tools:text="Firstname"/>
+                tools:text="Firstname Lastname"/>
 
         <TextView
-                android:id="@+id/tv_lastName"
-                app:layout_constraintLeft_toRightOf="@id/tv_firstName"
-                app:layout_constraintTop_toTopOf="parent"
-                android:text="@{player.lastName}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/default_margin"
+                android:id="@+id/lb_position"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_fullName"
+                android:text="@string/label_position"
                 android:layout_marginTop="@dimen/default_margin"
-                android:textSize="16sp"
-                tools:text="Lastname"/>
+                style="@style/labelTextStyle"/>
+
 
         <TextView
                 android:id="@+id/tv_position"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_firstName"
+                app:layout_constraintLeft_toRightOf="@id/lb_position"
+                app:layout_constraintTop_toBottomOf="@id/tv_fullName"
                 android:text="@{player.position}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginStart="@dimen/tv_margin"
                 android:layout_marginTop="@dimen/default_margin"
+                android:textColor="@android:color/holo_blue_dark"
                 android:textSize="16sp"
                 tools:text="OS"/>
 
         <TextView
-                android:id="@+id/tv_number"
+                android:id="@+id/lb_number"
                 app:layout_constraintLeft_toRightOf="@id/tv_position"
-                app:layout_constraintTop_toBottomOf="@id/tv_firstName"
+                app:layout_constraintTop_toBottomOf="@id/tv_fullName"
+                android:text="@string/label_wins"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginStart="@dimen/default_margin"
+                style="@style/labelTextStyle"
+                tools:text="Position:"/>
+
+        <TextView
+                android:id="@+id/tv_number"
+                app:layout_constraintLeft_toRightOf="@id/lb_number"
+                app:layout_constraintTop_toBottomOf="@id/tv_fullName"
                 android:text="@{String.valueOf(player.number)}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@android:color/holo_blue_dark"
                 android:layout_marginStart="@dimen/default_margin"
                 android:layout_marginTop="@dimen/default_margin"
                 android:textSize="16sp"

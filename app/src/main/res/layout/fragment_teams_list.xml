@@ -33,6 +33,23 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
+                android:visibility="gone"
+                app:layout_constraintRight_toRightOf="parent"
+                app:visibilityStatus="@{viewmodel.loading}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        <TextView
+                android:id="@+id/tv_dataExistStatus"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:visibility="gone"
+                android:onClick="@{() -> viewmodel.retrieveTeams()}"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/noDataRefresh"
+                android:textSize="20sp"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:visibilityStatus="@{viewmodel.apiResult}"
                 android:layout_width="wrap_content"

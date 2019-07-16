@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit
 
 
 /**
- * Network module
+ * Network module of DI
  */
 val networkModule = module {
 
@@ -41,22 +41,22 @@ val networkModule = module {
             request = if (hasNetwork(androidContext())!!) {
                 /*
             *  If there is Internet, get the cache that was stored 5 seconds ago.
-            *  If the cache is older than 5 seconds, then discard it,
+            *  If the cache is older than [CACHE_MAX_AGE] seconds, then discard it,
             *  and indicate an error in fetching the response.
             *  The 'max-age' attribute is responsible for this behavior.
             */
-                request.newBuilder().header("Cache-Control", "public, max-age=" + 5).build()
+                request.newBuilder().header("Cache-Control", "public, max-age=$CACHE_MAX_AGE").build()
             } else {
                 /*
-               *  If there is no Internet, get the cache that was stored 3 days ago.
-               *  If the cache is older than 3 days, then discard it,
+               *  If there is no Internet, get the cache that was stored [CACHE_MAX_STALE] seconds ago.
+               *  If the cache is older than [CACHE_MAX_STALE] seconds, then discard it,
                *  and indicate an error in fetching the response.
                *  The 'max-stale' attribute is responsible for this behavior.
                *  The 'only-if-cached' attribute indicates to not retrieve new data; fetch the cache only instead.
                */
                 request.newBuilder().header(
                     "Cache-Control",
-                    "public, only-if-cached, max-stale=" + 60 * 60 * 24 * 3
+                    "public, only-if-cached, max-stale=$CACHE_MAX_STALE"
                 ).build()
             }
 

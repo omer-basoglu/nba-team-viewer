@@ -38,7 +38,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    // Android main libraries. , Constraint Layout, RecyclerView
+    // Android libraries, Constraint Layout, RecyclerView
     implementation "androidx.appcompat:appcompat:$appcompat_version"
     implementation "androidx.legacy:legacy-support-v4:$legacysupport_version"
     implementation "com.google.android.material:material:$material_version"
@@ -49,10 +49,8 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "androidx.core:core-ktx:$kotlincore_version"
 
-    // Life cycle aware components (ViewModel + LiveData)
+    // Life cycle aware components (ViewModel + LiveData + Kotlin ext)
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_extensions_version"
-
-    // Kotlin extensions for viewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_extensions_version"
 
     // Koin Dependency Injection
@@ -77,14 +75,14 @@ dependencies {
     implementation "com.jakewharton.timber:timber:$timber_version"
 
     // Testing
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    testImplementation "junit:junit:$junit_version"
+    androidTestImplementation "androidx.test:runner:$test_runner_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
     androidTestImplementation "androidx.test:runner:$support_test_version"
     androidTestImplementation "androidx.test:rules:$support_test_version"
 
     // Testing for architecture components
-    testImplementation 'android.arch.core:core-testing:1.1.1'
+    testImplementation "android.arch.core:core-testing:$arc_test_version"
 
     // Koin for Unit tests
     testImplementation "org.koin:koin-test:$koin_version"
@@ -93,7 +91,7 @@ dependencies {
     testImplementation "org.mockito:mockito-core:$mockito_version"
 
     // Helpers :)
-    testImplementation 'org.assertj:assertj-core:3.12.2'
+    testImplementation "org.assertj:assertj-core:$assertj_version"
     testImplementation "org.hamcrest:hamcrest-all:$hamcrest_versions"
 
 }

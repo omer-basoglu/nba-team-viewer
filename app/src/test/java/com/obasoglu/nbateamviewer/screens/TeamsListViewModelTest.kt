@@ -9,7 +9,6 @@ import com.obasoglu.nbateamviewer.data.network.NbaApi
 import com.obasoglu.nbateamviewer.di.apiModule
 import com.obasoglu.nbateamviewer.di.viewModelModule
 import com.obasoglu.nbateamviewer.network.testNetworkModule
-import com.obasoglu.nbateamviewer.screens.teampage.TeamsPageViewModel
 import com.obasoglu.nbateamviewer.screens.teamslist.TeamsListViewModel
 import io.reactivex.Scheduler
 import io.reactivex.Single
@@ -50,7 +49,7 @@ class TeamsListViewModelTest : AutoCloseKoinTest() {
     // endregion helper fields
 
     //SUT
-    private val teamsListViewModel by inject<TeamsListViewModel>()
+    private val viewModel by inject<TeamsListViewModel>()
 
 
     @Before
@@ -69,11 +68,11 @@ class TeamsListViewModelTest : AutoCloseKoinTest() {
 
     @Test
     fun viewModelNotNull() {
-        assertThat(teamsListViewModel, notNullValue())
+        assertThat(viewModel, notNullValue())
     }
 
     @Test
-    fun loadTeamsSuccessCorrectSetLiveData() {
+    fun loadTeamsSuccessCorrectSetToLiveData() {
         //Arrange
         val player = Player(345, "Kawhi", "Leonard", "NA", 2)
         val team = Team(10, "Raptors", 12, 24, listOf(player))
@@ -82,14 +81,14 @@ class TeamsListViewModelTest : AutoCloseKoinTest() {
         val apiResult = ApiResult(teams = arrayListOf(team))
 
         //Act
-        teamsListViewModel.retrieveTeams()
+        viewModel.retrieveTeams()
 
         //Assert
-        Assert.assertEquals(teamsListViewModel.apiResult.value, apiResult)
+        Assert.assertEquals(viewModel.apiResult.value, apiResult)
     }
 
     @Test
-    fun loadTeamsFailureErrorSetLiveData() {
+    fun loadTeamsFailureErrorSetToLiveData() {
         //Arrange
         testSingle = Single.just(arrayListOf())
         val error = R.string.failure
@@ -97,10 +96,74 @@ class TeamsListViewModelTest : AutoCloseKoinTest() {
         val apiResult = ApiResult(error = error)
 
         //Act
-        teamsListViewModel.retrieveTeams()
+        viewModel.retrieveTeams()
 
         //Assert
-        Assert.assertEquals(teamsListViewModel.apiResult.value, apiResult)
+        Assert.assertEquals(viewModel.apiResult.value, apiResult)
+    }
+
+    //TODO: Test sorting
+    @Test
+    fun sortTeamsAlphabetically() {
+        //Arrange
+        val player = Player(345, "Kawhi", "Leonard", "NA", 2)
+        val team = Team(10, "Raptors", 12, 12, listOf(player))
+        val team2 = Team(10, "Aaptors", 14, 2, listOf(player))
+        val team3 = Team(10, "Zaptors", 6, 24, listOf(player))
+        testSingle = Single.just(arrayListOf(team, team2, team3))
+        Mockito.`when`(api.getTeams()).thenReturn(testSingle)
+        val orderList = arrayListOf(team, team2, team3).sortedBy { it.fullName }.toMutableList()
+        val orderedResult = ApiResult(teams = orderList)
+
+        //Act
+        viewModel.retrieveTeams()
+        viewModel.orderTeams(R.id.order_alphabetically)
+
+        //Assert
+        Assert.assertEquals(viewModel.apiResult.value, orderedResult)
+
+    }
+
+    @Test
+    fun sortTeamsByWins() {
+        //Arrange
+        val player = Player(345, "Kawhi", "Leonard", "NA", 2)
+        val team = Team(10, "Raptors", 12, 12, listOf(player))
+        val team2 = Team(10, "Aaptors", 14, 2, listOf(player))
+        val team3 = Team(10, "Zaptors", 6, 24, listOf(player))
+        testSingle = Single.just(arrayListOf(team, team2, team3))
+        Mockito.`when`(api.getTeams()).thenReturn(testSingle)
+        val orderList = arrayListOf(team, team2, team3).sortedBy { it.wins }.toMutableList()
+        val orderedResult = ApiResult(teams = orderList)
+
+        //Act
+        viewModel.retrieveTeams()
+        viewModel.orderTeams(R.id.order_wins)
+
+        //Assert
+        Assert.assertEquals(viewModel.apiResult.value, orderedResult)
+
+    }
+
+    @Test
+    fun sortTeamsByLosses() {
+        //Arrange
+        val player = Player(345, "Kawhi", "Leonard", "NA", 2)
+        val team = Team(10, "Raptors", 12, 12, listOf(player))
+        val team2 = Team(10, "Aaptors", 14, 2, listOf(player))
+        val team3 = Team(10, "Zaptors", 6, 24, listOf(player))
+        testSingle = Single.just(arrayListOf(team, team2, team3))
+        Mockito.`when`(api.getTeams()).thenReturn(testSingle)
+        val orderList = arrayListOf(team, team2, team3).sortedBy { it.losses }.toMutableList()
+        val orderedResult = ApiResult(teams = orderList)
+
+        //Act
+        viewModel.retrieveTeams()
+        viewModel.orderTeams(R.id.order_losses)
+
+        //Assert
+        Assert.assertEquals(viewModel.apiResult.value, orderedResult)
+
     }
 
 

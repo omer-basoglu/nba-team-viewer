@@ -4,6 +4,9 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 
+/**
+ * Utils class
+ */
 //TODO: Fix
 fun hasNetwork(context: Context): Boolean? {
     var isConnected: Boolean? = false // Initial Value

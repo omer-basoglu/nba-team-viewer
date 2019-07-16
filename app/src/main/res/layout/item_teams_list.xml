@@ -3,7 +3,6 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
 
-
     <data>
 
         <variable
@@ -12,6 +11,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+            android:padding="@dimen/default_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -20,37 +20,45 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:text="@{team.fullName}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/default_margin"
-                android:layout_marginTop="@dimen/default_margin"
-                android:textSize="24sp"
+                style="@style/MainTextViewStyle"
                 tools:text="Team FullName"/>
 
         <TextView
-                android:id="@+id/tv_wins"
+                android:id="@+id/lb_wins"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_fullName"
-                android:text="@{String.valueOf(team.wins)}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/default_margin"
+                android:text="@string/label_wins"
                 android:layout_marginTop="@dimen/default_margin"
-                android:textSize="16sp"
+                style="@style/labelTextStyle"/>
+
+        <TextView
+                android:id="@+id/tv_wins"
+                app:layout_constraintLeft_toRightOf="@id/lb_wins"
+                app:layout_constraintBottom_toBottomOf="@id/lb_wins"
+                android:text="@{String.valueOf(team.wins)}"
+                android:layout_marginStart="@dimen/tv_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                style="@style/SubTextViewStyle"
                 tools:text="14"/>
 
         <TextView
-                android:id="@+id/tv_losses"
+                android:id="@+id/lb_losses"
                 app:layout_constraintLeft_toRightOf="@id/tv_wins"
                 app:layout_constraintTop_toBottomOf="@id/tv_fullName"
-                android:text="@{String.valueOf(team.losses)}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:text="@string/label_losses"
                 android:layout_marginStart="@dimen/default_margin"
                 android:layout_marginTop="@dimen/default_margin"
-                android:textSize="16sp"
-                tools:text="22"/>
+                style="@style/labelTextStyle"/>
 
+        <TextView
+                android:id="@+id/tv_losses"
+                app:layout_constraintLeft_toRightOf="@id/lb_losses"
+                app:layout_constraintBottom_toBottomOf="@id/lb_losses"
+                android:text="@{String.valueOf(team.losses)}"
+                android:layout_marginStart="@dimen/tv_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                style="@style/SubTextViewStyle"
+                tools:text="22"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -5,7 +5,7 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 
 /**
- * Api Module
+ * Api Module of DI
  */
 val apiModule = module {
     single(createdAtStart = false) {
